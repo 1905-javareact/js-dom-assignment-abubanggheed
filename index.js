@@ -8,7 +8,8 @@
 getUSA()
 function getUSA() {
   console.log(
-    document.querySelector('span[data-customAttr="USA"]').innerHTML
+    Array.from(document.getElementsByTagName('h1')[0].children)
+    .filter(node => node.innerText === 'USA')[0].innerHTML
   )
 }
 // 2. Sales
@@ -39,13 +40,25 @@ function getAnchorChildren() {
 // Define function getHobbies()
 // Find all checked options in the 'skills' select element.
 // Print the value and the contents.
-
+getHobbies()
+function getHobbies() {
+  Array.from(document.getElementsByName('skills')
+  [0].children).filter(child => child.selected)
+  .forEach(node => {
+    console.log(node.value, node.innerHTML)
+  })
+}
 // 5. Custom Attribute
 // Define function getCustomAttribute()
 // Find all elements with "data-customAttr" attribute
 // Print the value of the attribute.
 // Print the element that has the attribute. 
-
+getCustomAttribute()
+function getCustomAttribute() {
+  console.log(
+    document.querySelector('span[data-customAttr="USA"]')
+  )
+}
 // 6. Sum Event
 // NOTE: Write unobtrusive Javascript
 // Regarding these elements:
