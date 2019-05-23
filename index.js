@@ -5,16 +5,36 @@
 // Define function getUSA()
 // Find the html element that contains "USA".
 // Print that element's contents.
-
+getUSA()
+function getUSA() {
+  console.log(
+    document.querySelector('span[data-customAttr="USA"]').innerHTML
+  )
+}
 // 2. Sales
 // Define function getPeopleInSales()
 // Print the names of all the people in the sales department.
-
+getPeopleInSales()
+function getPeopleInSales() {
+  console.log(
+    ...Array.from(document.getElementsByClassName('empName'))
+      .filter(node => node.parentElement.innerText.includes('Sales'))
+      .map(node => node.innerText)
+  )
+}
 // 3. Click Here
 // Define function getAnchorChildren()
 // Find all anchor elements with a <span> child.
 // Print the contents of <span>
-
+getAnchorChildren()
+function getAnchorChildren() {
+  console.log(
+    ...Array.from(document.getElementsByTagName('a'))
+      .map(tag => Array.from(tag.children)[0])
+      .filter(node => node)
+      .map(node => node.innerHTML)
+  )
+}
 // 4. Hobbies
 // Define function getHobbies()
 // Find all checked options in the 'skills' select element.
