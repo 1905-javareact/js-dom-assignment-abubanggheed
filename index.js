@@ -55,9 +55,10 @@ function getHobbies() {
 // Print the element that has the attribute. 
 getCustomAttribute()
 function getCustomAttribute() {
-  console.log(
-    document.querySelector('span[data-customAttr="USA"]')
-  )
+  document.querySelectorAll('*[data-customAttr]')
+  .forEach(element => {
+    console.log(element.value, element)
+  })
 }
 // 6. Sum Event
 // NOTE: Write unobtrusive Javascript
@@ -65,7 +66,17 @@ function getCustomAttribute() {
 // 	<input id="num1" class="nums" type="text"/>
 // 	<input id="num2" class="nums" type="text"/>
 // 	<h3>Sum: <span id="sum"></span></h3>  
-
+let num1 = document.getElementById('num1')
+let num2 = document.getElementById('num2')
+let numOut = document.getElementById('sum')
+num1.addEventListener('change', handleNumChange)
+num2.addEventListener('change', handleNumChange)
+function handleNumChange () {
+  let out1 = +num1.value
+  let out2 = +num2.value
+  let sum = out1 + out2
+  numOut.innerText = (sum === sum) ? sum : 'Cannot add'
+}
 // Define onchange event handler.
 // Add <input> element values.
 // Put the sum in the <span> element.
@@ -75,8 +86,10 @@ function getCustomAttribute() {
 // When user selects a skill, create an alert with a message similar to:
 // 	"Are you sure CSS is one of your skills?"
 // NOTE: no alert should appear when user deselects a skill.
-
-
+let skillIn = document.getElementsByName('skills')[0]
+skillIn.addEventListener('change', () => {
+  alert(`Are you sure ${skillIn.value} is one of your skills?`)
+})
 // 8. Favorite Color Event
 // NOTE: Write unobtrusive Javascript
 // NOTE: This is regarding the favoriteColor radio buttons.
