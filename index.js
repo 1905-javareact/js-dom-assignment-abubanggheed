@@ -5,7 +5,6 @@
 // Define function getUSA()
 // Find the html element that contains "USA".
 // Print that element's contents.
-getUSA()
 function getUSA() {
   console.log(
     Array.from(document.getElementsByTagName('h1')[0].children)
@@ -15,7 +14,6 @@ function getUSA() {
 // 2. Sales
 // Define function getPeopleInSales()
 // Print the names of all the people in the sales department.
-getPeopleInSales()
 function getPeopleInSales() {
   console.log(
     ...Array.from(document.getElementsByClassName('empName'))
@@ -27,12 +25,12 @@ function getPeopleInSales() {
 // Define function getAnchorChildren()
 // Find all anchor elements with a <span> child.
 // Print the contents of <span>
-getAnchorChildren()
 function getAnchorChildren() {
   console.log(
     ...Array.from(document.getElementsByTagName('a'))
-      .map(tag => Array.from(tag.children)[0])
-      .filter(node => node)
+      .map(anchor => Array.from(anchor.children)
+        .filter(child => child.localName === 'span')[0]
+      ).filter(node => node)
       .map(node => node.innerHTML)
   )
 }
@@ -40,7 +38,6 @@ function getAnchorChildren() {
 // Define function getHobbies()
 // Find all checked options in the 'skills' select element.
 // Print the value and the contents.
-getHobbies()
 function getHobbies() {
   Array.from(document.getElementsByName('skills')
   [0].children).filter(child => child.selected)
@@ -53,7 +50,6 @@ function getHobbies() {
 // Find all elements with "data-customAttr" attribute
 // Print the value of the attribute.
 // Print the element that has the attribute. 
-getCustomAttribute()
 function getCustomAttribute() {
   document.querySelectorAll('*[data-customAttr]')
     .forEach(element => {
@@ -130,7 +126,16 @@ Array.from(document.getElementsByClassName('empName')
 let timeOut = document.getElementById('currentTime')
 setInterval(setDate, 1000);
 function setDate() {
-  timeOut.innerText = new Date()// not formatted finish later
+  let dayTime
+  let dateArray = String(new Date()).split(' ')
+    .filter(str => str.includes(':'))[0].split(':')
+  if (+dateArray[0] > 12) {
+    dayTime = ' PM'
+    dateArray[0] = +dateArray[0] - 12
+  } else {
+    dayTime = ' AM'
+  }
+  timeOut.innerText = dateArray.join(':') + dayTime
 }
 
 // 11. Delay
@@ -141,7 +146,7 @@ let helloWorldOut = document.getElementById('helloWorld')
 helloWorldOut.addEventListener('click', () => {
   setTimeout(() => {
     helloWorldOut.setAttribute('style',
-    `color:RGB(${randomNumber(255)}, ${randomNumber(255)}, ${randomNumber(255)})`)
+      `color:RGB(${randomNumber(255)}, ${randomNumber(255)}, ${randomNumber(255)})`)
   }, 3000)
 })
 function randomNumber(max = 1, min = 0) {
@@ -154,7 +159,7 @@ function randomNumber(max = 1, min = 0) {
 // On each node, call func(node).
 function walkTheDOM(node, func) {
   func(node)
-  node.childNodes.forEach(child =>{
+  node.childNodes.forEach(child => {
     walkTheDOM(child, func)
   })
 }
