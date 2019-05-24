@@ -9,7 +9,7 @@ getUSA()
 function getUSA() {
   console.log(
     Array.from(document.getElementsByTagName('h1')[0].children)
-    .filter(node => node.innerText === 'USA')[0].innerHTML
+      .filter(node => node.innerText === 'USA')[0].innerHTML
   )
 }
 // 2. Sales
@@ -44,9 +44,9 @@ getHobbies()
 function getHobbies() {
   Array.from(document.getElementsByName('skills')
   [0].children).filter(child => child.selected)
-  .forEach(node => {
-    console.log(node.value, node.innerHTML)
-  })
+    .forEach(node => {
+      console.log(node.value, node.innerHTML)
+    })
 }
 // 5. Custom Attribute
 // Define function getCustomAttribute()
@@ -56,9 +56,9 @@ function getHobbies() {
 getCustomAttribute()
 function getCustomAttribute() {
   document.querySelectorAll('*[data-customAttr]')
-  .forEach(element => {
-    console.log(element.value, element)
-  })
+    .forEach(element => {
+      console.log(element.value, element)
+    })
 }
 // 6. Sum Event
 // NOTE: Write unobtrusive Javascript
@@ -71,7 +71,7 @@ let num2 = document.getElementById('num2')
 let numOut = document.getElementById('sum')
 num1.addEventListener('change', handleNumChange)
 num2.addEventListener('change', handleNumChange)
-function handleNumChange () {
+function handleNumChange() {
   let out1 = +num1.value
   let out2 = +num2.value
   let sum = out1 + out2
@@ -97,27 +97,64 @@ skillIn.addEventListener('change', () => {
 // 	"So you like green more than blue now?"
 // In this example, green is the new value and blue is the old value.
 // Make the background color (of all favoriteColor radio buttons) the newly selected favoriteColor
-
+let prevColor = ''
+let colorButtons = document.getElementsByName('favoriteColor')
+colorButtons.forEach(btn => {
+  btn.addEventListener('change', event => {
+    let curColor = event.target.value
+    if (prevColor) {
+      alert(`So you like ${curColor} more than ${prevColor} now?`)
+    } else {
+      alert(`I understand. You like ${curColor}.`)
+    }
+    prevColor = curColor
+  })
+})
 // 9. Show/Hide Event
 // NOTE: Write unobtrusive Javascript
 // When user hovers over an employees name:
 // 	Hide the name if shown.
 // 	Show the name if hidden.
-
+Array.from(document.getElementsByClassName('empName')
+).forEach(node => {
+  node.parentElement.addEventListener('mouseover', () => {
+    node.toggleAttribute('hidden')// not hover fix later
+  })
+})
 
 // 10. Current Time
 // Regarding this element:
 // 	<h5 id="currentTime"></h5>
 // Show the current time in this element in this format: 9:05:23 AM
 // The time should be accurate to the second without having to reload the page.
-
+let timeOut = document.getElementById('currentTime')
+setInterval(setDate, 1000);
+function setDate() {
+  timeOut.innerText = new Date()// not formatted finish later
+}
 
 // 11. Delay
 // Regarding this element:
 // 	<p id="helloWorld">Hello, World!</p>
 // Three seconds after a user clicks on this element, change the text to a random color.
+let helloWorldOut = document.getElementById('helloWorld')
+helloWorldOut.addEventListener('click', () => {
+  setTimeout(() => {
+    helloWorldOut.setAttribute('style',
+    `color:RGB(${randomNumber(255)}, ${randomNumber(255)}, ${randomNumber(255)})`)
+  }, 3000)
+})
+function randomNumber(max = 1, min = 0) {
+  return Math.floor(Math.random() * max + 1 - min)
+}
 
 // 12. Walk the DOM
 // Define function walkTheDOM(node, func)
 // This function should traverse every node in the DOM. Use recursion.
 // On each node, call func(node).
+function walkTheDOM(node, func) {
+  func(node)
+  node.childNodes.forEach(child =>{
+    walkTheDOM(child, func)
+  })
+}
