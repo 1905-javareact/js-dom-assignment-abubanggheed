@@ -115,7 +115,7 @@ colorButtons.forEach(btn => {
 Array.from(document.getElementsByClassName('empName')
 ).forEach(node => {
   node.parentElement.addEventListener('mouseenter', () => {
-    node.toggleAttribute('hidden')// not hover fix later
+    node.toggleAttribute('hidden')
   })
 })
 
@@ -135,6 +135,9 @@ function setDate() {
     dateArray[0] = +dateArray[0] - 12
   } else {
     dayTime = ' AM'
+    if(+dateArray[0] === 0) {
+      dateArray[0] = 12
+    }
   }
   timeOut.innerText = dateArray.join(':') + dayTime
 }
