@@ -17,7 +17,8 @@ function getUSA() {
 function getPeopleInSales() {
   console.log(
     ...Array.from(document.getElementsByClassName('empName'))
-      .filter(node => node.parentElement.innerText.includes('Sales'))
+      .filter(node => node.nextElementSibling &&
+        node.nextElementSibling.innerText.includes('Sales'))
       .map(node => node.innerText)
   )
 }
@@ -113,7 +114,7 @@ colorButtons.forEach(btn => {
 // 	Show the name if hidden.
 Array.from(document.getElementsByClassName('empName')
 ).forEach(node => {
-  node.parentElement.addEventListener('mouseover', () => {
+  node.parentElement.addEventListener('mouseenter', () => {
     node.toggleAttribute('hidden')// not hover fix later
   })
 })
