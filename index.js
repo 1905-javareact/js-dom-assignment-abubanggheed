@@ -132,7 +132,9 @@ function setDate() {
     .filter(str => str.includes(':'))[0].split(':')
   if (+dateArray[0] > 11) {
     dayTime = ' PM'
-    dateArray[0] = +dateArray[0] - 12
+    if(+dateArray[0] > 12) {
+      dateArray[0] = +dateArray[0] - 12
+    }   
   } else {
     dayTime = ' AM'
     if(+dateArray[0] === 0) {
