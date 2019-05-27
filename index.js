@@ -130,7 +130,7 @@ function setDate() {
   let dayTime
   let dateArray = String(new Date()).split(' ')
     .filter(str => str.includes(':'))[0].split(':')
-  if (+dateArray[0] > 12) {
+  if (+dateArray[0] > 11) {
     dayTime = ' PM'
     dateArray[0] = +dateArray[0] - 12
   } else {
@@ -154,7 +154,7 @@ helloWorldOut.addEventListener('click', () => {
   }, 3000)
 })
 function randomNumber(max = 1, min = 0) {
-  return Math.floor(Math.random() * max + 1 - min)
+  return Math.floor(Math.random() * (max + 1 - min) + min)
 }
 
 // 12. Walk the DOM
