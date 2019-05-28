@@ -99,6 +99,9 @@ let colorButtons = document.getElementsByName('favoriteColor')
 colorButtons.forEach(btn => {
   btn.addEventListener('change', event => {
     let curColor = event.target.value
+    colorButtons.forEach(btn => {
+      btn.style.backgroundColor = curColor
+    })
     if (prevColor) {
       alert(`So you like ${curColor} more than ${prevColor} now?`)
     } else {
